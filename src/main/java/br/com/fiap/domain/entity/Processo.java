@@ -1,16 +1,31 @@
 package br.com.fiap.domain.entity;
 
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "PROCESSO",
+        uniqueConstraints = @UniqueConstraint(columnNames = "Nm_Processo"))
 public class Processo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_PROCESSO")
+    @SequenceGenerator(name = "SQ_PROCESSO", sequenceName = "SQ_PROCESSO")
+    @Column(name = "ID_PROCESSO")
+
 
     private Long id;
-
+    @Column (name = "Nm_Processo")
     private String numero;
 
+    @Column (name = "PB_Processo")
     private Boolean proBono;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_Advogado")
     private Advogado advogado;
 
-
+    @ManyToOne
+    @JoinColumn(name = "TP_Processo")
     private TipoDeAcao tipoDeAcao;
 
 

@@ -1,14 +1,28 @@
 package br.com.fiap.domain.entity;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Advogado {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_ADVOGADO")
+    @SequenceGenerator(name = "SQ_ADVOGADO", sequenceName = "SQ_ADVOGADO")
+    @Column(name = "ID_ADVOGADO")
 
     private Long id;
 
+    @Column(name = "NM_ADVOGADO")
     private String nome;
 
+
+    @Column(name = "NUMERO_OAB", unique = true, nullable = false)
     private String numeroOAB;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_Estado")
     private Estado estado;
+
 
     public Advogado() {
     }

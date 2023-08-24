@@ -1,12 +1,26 @@
 package br.com.fiap.domain.entity;
+import jakarta.persistence.*;
+import java.io.Serializable;
 
-public class Estado {
+@Entity
+@Table(name = "ESTADO", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "NOME_ESTADO", name = "UK_NOME_ESTADO"),
+        @UniqueConstraint(columnNames = "SIGLA_ESTADO", name = "UK_SIGLA_ESTADO")
+})
+public class Estado implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_ESTADO")
+    @SequenceGenerator(name = "SQ_ESTADO", sequenceName = "SQ_ESTADO")
+    @Column(name = "ID_ESTADO")
     private Long id;
 
+    @Column(name = "NOME_ESTADO", unique = true, nullable = false)
     private String nome;
 
+    @Column(name = "SIGLA_ESTADO", unique = true, nullable = false)
     private String sigla;
+
 
     public Estado() {
     }
